@@ -4,6 +4,7 @@ import { JwtModule } from "@nestjs/jwt";
 import { env } from "./infra/env";
 import { APP_GUARD } from "@nestjs/core";
 import { AuthGuard } from "./infra/security/auth";
+import { UserProfileModule } from "./application/modules/userProfile.module";
 
 @Module({
   imports: [
@@ -12,7 +13,8 @@ import { AuthGuard } from "./infra/security/auth";
       secret: env.SUPABASE_JWT_SECRET,
       signOptions: { expiresIn: "60s" }
     }),
-    AuthModule
+    AuthModule,
+    UserProfileModule
   ],
   controllers: [],
   providers: [

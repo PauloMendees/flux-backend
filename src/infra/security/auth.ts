@@ -5,6 +5,12 @@ import { Reflector } from "@nestjs/core";
 import { IS_PUBLIC_KEY } from "./skipAuth";
 import { prismaClient } from "../database/prisma";
 import { env } from "../env";
+import { UserProfile } from "src/domain/userProfile/entity";
+
+export interface CustomReq {
+  user: UserProfile;
+  token: string;
+}
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -45,7 +51,7 @@ export class AuthGuard implements CanActivate {
         throw new UnauthorizedException();
       }
 
-      request["user"] = payload;
+      request["user"] = dbUser;
       request["token"] = token;
     } catch {
       throw new UnauthorizedException();
