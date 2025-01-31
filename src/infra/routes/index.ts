@@ -1,5 +1,6 @@
 export const routes = {
   auth: {
-    signup: "/auth/signup"
+    signup: "/auth/signup",
+    signin: "/auth/signin"
   }
 };
