@@ -21,7 +21,6 @@ export class SigninController {
   async execute(@Body() body: SigninRequestDTO) {
     validateSchema(body, loginSchema);
     const response = await this.service.execute(body);
-    console.log(response);
     return response;
   }
 }
