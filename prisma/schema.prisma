@@ -5,14 +5,32 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 model UserProfile {
-  id         String   @id @unique @default(uuid())
+  id         String       @id @unique @default(uuid())
   first_name String
   last_name  String
-  email      String   @unique
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @default(now())
+  email      String       @unique
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @default(now())
+  UserWallet UserWallet[]
 
   @@map("user_profile")
+}
+
+model UserWallet {
+  id            String      @id @unique @default(uuid())
+  user          UserProfile @relation(fields: [userProfileId], references: [id])
+  wallet        Wallet      @relation(fields: [walletId], references: [id])
+  userProfileId String
+  walletId      String
+  createdAt     DateTime    @default(now())
+}
+
+model Wallet {
+  id         String       @id @unique @default(uuid())
+  name       String
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @default(now())
+  UserWallet UserWallet[]
 }
 
 generator client {
