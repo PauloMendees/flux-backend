@@ -25,6 +25,7 @@ export class SignupService {
     const { email, first_name, last_name } = dto;
     const response = await this.authRepository.signup(dto);
     await this.dbRepository.createUserProfile({
+      id: response?.data?.user?.id,
       email,
       first_name,
       last_name
