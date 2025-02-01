@@ -5,13 +5,15 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 model UserProfile {
-  id         String       @id @unique @default(uuid())
-  first_name String
-  last_name  String
-  email      String       @unique
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @default(now())
-  UserWallet UserWallet[]
+  id           String        @id @unique @default(uuid())
+  first_name   String
+  last_name    String
+  email        String        @unique
+  userWallets  UserWallet[]
+  categories   Category[]
+  transactions Transaction[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @default(now())
 
   @@map("user_profile")
 }
@@ -23,14 +25,57 @@ model UserWallet {
   userProfileId String
   walletId      String
   createdAt     DateTime    @default(now())
+
+  @@map("user_wallet")
 }
 
 model Wallet {
-  id         String       @id @unique @default(uuid())
-  name       String
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @default(now())
-  UserWallet UserWallet[]
+  id           String        @id @unique @default(uuid())
+  name         String
+  description  String?
+  userWallets  UserWallet[]
+  transactions Transaction[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @default(now())
+
+  @@map("wallet")
+}
+
+model Transaction {
+  id            String           @id @unique @default(uuid())
+  title         String
+  description   String?
+  value         Float
+  type          TRANSACTION_TYPE
+  categoryId    String?
+  userProfileId String
+  walletId      String?
+  wallet        Wallet?          @relation(fields: [walletId], references: [id])
+  user          UserProfile      @relation(fields: [userProfileId], references: [id])
+  category      Category?        @relation(fields: [categoryId], references: [id])
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @default(now())
+
+  @@map("transaction")
+}
+
+model Category {
+  id            String        @id @unique @default(uuid())
+  name          String
+  description   String?
+  customColor   String?
+  userProfileId String
+  user          UserProfile   @relation(fields: [userProfileId], references: [id])
+  transaction   Transaction[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @default(now())
+
+  @@map("category")
+}
+
+enum TRANSACTION_TYPE {
+  INCOMING
+  DEBIT
 }
 
 generator client {
