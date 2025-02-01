@@ -3,5 +3,5 @@ export interface UpdateCategoryDTO {
   name: string;
   description?: string;
   customColor?: string;
-  userProfileId?: string;
+  userProfileId: string;
 }
