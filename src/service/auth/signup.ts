@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
-import { PrismaUserProfileRepository } from "src/infra/database/prisma-repositories/userProfile";
+import { PrismaUserProfileRepository } from "src/infra/database/prisma-repositories/user-profile";
 import { SupabaseAuthRepository } from "src/infra/supabase/supabase-repositories/auth";
 
 export class SignupRequestDTO {
