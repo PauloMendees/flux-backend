@@ -1,0 +1,79 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table user_profile {
+  id String [pk]
+  first_name String [not null]
+  last_name String [not null]
+  email String [unique, not null]
+  userWallets user_wallet [not null]
+  categories category [not null]
+  transactions transaction [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [default: `now()`, not null]
+}
+
+Table user_wallet {
+  id String [pk]
+  user user_profile [not null]
+  wallet wallet [not null]
+  userProfileId String [not null]
+  walletId String [not null]
+  createdAt DateTime [default: `now()`, not null]
+}
+
+Table wallet {
+  id String [pk]
+  name String [not null]
+  description String
+  userWallets user_wallet [not null]
+  transactions transaction [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [default: `now()`, not null]
+}
+
+Table transaction {
+  id String [pk]
+  title String [not null]
+  description String
+  value Float [not null]
+  type TRANSACTION_TYPE [not null]
+  categoryId String
+  userProfileId String [not null]
+  walletId String
+  wallet wallet
+  user user_profile [not null]
+  category category
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [default: `now()`, not null]
+}
+
+Table category {
+  id String [pk]
+  name String [not null]
+  description String
+  customColor String
+  userProfileId String [not null]
+  user user_profile [not null]
+  transaction transaction [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [default: `now()`, not null]
+}
+
+Enum TRANSACTION_TYPE {
+  INCOMING
+  DEBIT
+}
+
+Ref: user_wallet.userProfileId > user_profile.id
+
+Ref: user_wallet.walletId > wallet.id
+
+Ref: transaction.walletId > wallet.id
+
+Ref: transaction.userProfileId > user_profile.id
+
+Ref: transaction.categoryId > category.id
+
+Ref: category.userProfileId > user_profile.id
