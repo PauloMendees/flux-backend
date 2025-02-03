@@ -1,10 +1,11 @@
 import { Controller, Get, Request } from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import { apiTags } from "src/infra/constants/apiTags";
 import { routes } from "src/infra/routes";
 import { CustomReq } from "src/infra/security/auth";
 import { GetUserProfileService } from "src/service/userProfile/getUserProfile";
 
-@ApiTags("Profile")
+@ApiTags(apiTags.profile)
 @Controller()
 export class GetUserProfileClass {
   constructor(private readonly service: GetUserProfileService) {}

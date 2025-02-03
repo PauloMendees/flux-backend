@@ -25,7 +25,7 @@ export class PrismaCategoryRepository implements CategoryRepository {
   }
 
   async getById(id: string): Promise<Category> {
-    return await prismaClient.category.findUnique({
+    return await prismaClient.category.findUniqueOrThrow({
       where: {
         id: id
       }

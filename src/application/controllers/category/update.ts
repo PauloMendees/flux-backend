@@ -1,5 +1,6 @@
 import { Body, Controller, Put, Request } from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import { apiTags } from "src/infra/constants/apiTags";
 import { handleError } from "src/infra/errors/handleError";
 import { routes } from "src/infra/routes";
 import { CustomReq } from "src/infra/security/auth";
@@ -14,7 +15,7 @@ const schema = z.object({
   customColor: z.string().optional()
 });
 
-@ApiTags("Category")
+@ApiTags(apiTags.category)
 @Controller()
 export class UpdateCategoryController {
   constructor(private readonly service: UpdateCategoryService) {}
