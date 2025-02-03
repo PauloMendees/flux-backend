@@ -1,5 +1,6 @@
 import { Body, Controller, Post } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
+import { apiTags } from "src/infra/constants/apiTags";
 import { routes } from "src/infra/routes";
 import { SkipAuth } from "src/infra/security/skipAuth";
 import { validateSchema } from "src/infra/validations/validateSchema";
@@ -13,7 +14,7 @@ const signupSchema = z.object({
   last_name: z.string()
 });
 
-@ApiTags("Authentication")
+@ApiTags(apiTags.auth)
 @Controller()
 export class SignupController {
   constructor(private readonly service: SignupService) {}

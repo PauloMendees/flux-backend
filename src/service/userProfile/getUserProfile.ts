@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { PrismaUserProfileRepository } from "src/infra/database/prisma-repositories/userProfile";
+import { PrismaUserProfileRepository } from "src/infra/database/prisma-repositories/user-profile";
 
 @Injectable()
 export class GetUserProfileService {
