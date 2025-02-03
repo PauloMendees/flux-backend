@@ -1,9 +1,11 @@
-import { Controller, Get, Request } from "@nestjs/common";
+import { Controller, Get, Query, Request } from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { apiTags } from "src/infra/constants/apiTags";
+import { DefaultFiltersDto, queryFilterSchema } from "src/infra/constants/queryFilterSchema";
 import { handleError } from "src/infra/errors/handleError";
 import { routes } from "src/infra/routes";
 import { CustomReq } from "src/infra/security/auth";
+import { validateSchema } from "src/infra/validations/validateSchema";
 import { ListCategoriesService } from "src/service/category/list";
 
 @ApiTags(apiTags.category)
@@ -13,9 +15,10 @@ export class ListCategoriesController {
 
   @ApiBearerAuth("JWT")
   @Get(routes.category)
-  async execute(@Request() req: CustomReq) {
+  async execute(@Request() req: CustomReq, @Query() query: DefaultFiltersDto) {
     try {
-      return await this.service.execute(req.user.id);
+      const parsed = validateSchema(query, queryFilterSchema);
+      return await this.service.execute(parsed, req.user.id);
     } catch (error) {
       handleError(error);
     }

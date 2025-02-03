@@ -4,6 +4,7 @@ import { CreateCategoryDTO } from "src/domain/category/entity/dto/create";
 import { UpdateCategoryDTO } from "src/domain/category/entity/dto/update";
 import { CategoryRepository } from "src/domain/category/repository";
 import { prismaClient } from "../../prisma";
+import { DefaultQueryFilter } from "src/infra/constants/queryFilterSchema";
 
 @Injectable()
 export class PrismaCategoryRepository implements CategoryRepository {
@@ -40,11 +41,49 @@ export class PrismaCategoryRepository implements CategoryRepository {
     });
   }
 
-  async list(userId: string): Promise<Category[]> {
+  async count({ search }: Omit<DefaultQueryFilter, "page" | "pageSize">, userId: string): Promise<number> {
+    return await prismaClient.category.count({
+      where: {
+        AND: [
+          {
+            userProfileId: userId
+          },
+          {
+            OR: [
+              {
+                name: search
+              },
+              {
+                description: search
+              }
+            ]
+          }
+        ]
+      }
+    });
+  }
+
+  async list({ page, pageSize, search }: DefaultQueryFilter, userId: string): Promise<Category[]> {
     return await prismaClient.category.findMany({
       where: {
-        userProfileId: userId
-      }
+        AND: [
+          {
+            userProfileId: userId
+          },
+          {
+            OR: [
+              {
+                name: search
+              },
+              {
+                description: search
+              }
+            ]
+          }
+        ]
+      },
+      take: pageSize,
+      skip: (page - 1) * pageSize
     });
   }
 }
