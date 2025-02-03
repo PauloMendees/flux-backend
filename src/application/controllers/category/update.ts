@@ -1,13 +1,14 @@
-import { Body, Controller, Post, Request } from "@nestjs/common";
+import { Body, Controller, Put, Request } from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { handleError } from "src/infra/errors/handleError";
 import { routes } from "src/infra/routes";
 import { CustomReq } from "src/infra/security/auth";
 import { validateSchema } from "src/infra/validations/validateSchema";
-import { CreateCategoryService, CreateCategoryServiceDTO } from "src/service/category/create";
+import { UpdateCategoryService, UpdateCategoryServiceDTO } from "src/service/category/update";
 import { z } from "zod";
 
 const schema = z.object({
+  id: z.string(),
   name: z.string(),
   description: z.string(),
   customColor: z.string().optional()
@@ -15,12 +16,12 @@ const schema = z.object({
 
 @ApiTags("Category")
 @Controller()
-export class CreateCategoryController {
-  constructor(private readonly service: CreateCategoryService) {}
+export class UpdateCategoryController {
+  constructor(private readonly service: UpdateCategoryService) {}
 
   @ApiBearerAuth("JWT")
-  @Post(routes.category)
-  async execute(@Body() body: CreateCategoryServiceDTO, @Request() req: CustomReq) {
+  @Put(`${routes.category}`)
+  async execute(@Body() body: UpdateCategoryServiceDTO, @Request() req: CustomReq) {
     try {
       validateSchema(body, schema);
 
