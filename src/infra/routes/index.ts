@@ -5,5 +5,6 @@ export const routes = {
   },
   profile: {
     getInfos: "/user/infos"
-  }
+  },
+  category: "/category"
 };

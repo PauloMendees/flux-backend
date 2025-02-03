@@ -5,6 +5,7 @@ import { env } from "./infra/env";
 import { APP_GUARD } from "@nestjs/core";
 import { AuthGuard } from "./infra/security/auth";
 import { UserProfileModule } from "./application/modules/userProfile.module";
+import { CategoryModule } from "./application/modules/category.module";
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import { UserProfileModule } from "./application/modules/userProfile.module";
       signOptions: { expiresIn: "60s" }
     }),
     AuthModule,
-    UserProfileModule
+    UserProfileModule,
+    CategoryModule
   ],
   controllers: [],
   providers: [
