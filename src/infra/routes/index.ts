@@ -6,5 +6,8 @@ export const routes = {
   profile: {
     getInfos: "/user/infos"
   },
-  category: "/category"
+  category: "/category",
+  wallet: {
+    main: "/wallet"
+  }
 };
