@@ -17,6 +17,7 @@ export interface UserWallet {
   userProfileId?: string;
   walletId?: string;
   user?: UserProfile;
+  accepted: boolean;
   wallet: Wallet;
   createdAt?: Date;
   updatedAt?: Date;

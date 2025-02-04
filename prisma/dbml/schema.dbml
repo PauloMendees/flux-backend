@@ -21,6 +21,7 @@ Table user_wallet {
   user user_profile [not null]
   wallet wallet [not null]
   userProfileId String [not null]
+  accepted Boolean [not null, default: true]
   walletId String [not null]
   createdAt DateTime [default: `now()`, not null]
 }

@@ -75,7 +75,14 @@ export class PrismaUserWalletRepository implements UserWalletRepository {
   async list(userId: string): Promise<UserWallet[]> {
     const response = await prismaClient.userWallet.findMany({
       where: {
-        userProfileId: userId
+        AND: [
+          {
+            userProfileId: userId
+          },
+          {
+            deleted: false
+          }
+        ]
       },
       include: {
         wallet: true

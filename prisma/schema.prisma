@@ -25,6 +25,7 @@ model UserWallet {
   user          UserProfile @relation(fields: [userProfileId], references: [id])
   wallet        Wallet      @relation(fields: [walletId], references: [id])
   userProfileId String
+  accepted      Boolean     @default(true)
   walletId      String
   createdAt     DateTime    @default(now())
 
