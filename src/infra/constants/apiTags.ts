@@ -1,5 +1,6 @@
 export const apiTags = {
   category: "Category",
   auth: "Authentication",
-  profile: "Profile"
+  profile: "Profile",
+  wallet: "Wallet"
 };

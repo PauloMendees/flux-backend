@@ -6,6 +6,7 @@ export interface Wallet {
   description: string;
   deleted?: boolean;
   ownerId: string;
+  userWallets?: UserWallet[];
   owner?: UserProfile;
   createdAt?: Date;
   updatedAt?: Date;
@@ -18,7 +19,7 @@ export interface UserWallet {
   walletId?: string;
   user?: UserProfile;
   accepted: boolean;
-  wallet: Wallet;
+  wallet?: Wallet;
   createdAt?: Date;
   updatedAt?: Date;
 }

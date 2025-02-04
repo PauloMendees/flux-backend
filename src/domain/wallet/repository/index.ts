@@ -6,6 +6,7 @@ export interface WalletRepository {
   create(dto: CreateWalletDto): Promise<Wallet>;
   update(dto: UpdateWalletDto): Promise<Wallet>;
   delete(walletId: string, ownerId: string): Promise<void>;
+  getById(walletId: string): Promise<Wallet>;
 }
 
 export interface UserWalletRepository {

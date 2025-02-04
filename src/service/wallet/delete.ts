@@ -5,8 +5,6 @@ import { PrismaUserWalletRepository, PrismaWalletRepository } from "src/infra/da
 export class DeleteWalletServiceDto {
   @ApiProperty({ type: "string", required: true })
   walletId: string;
-  @ApiProperty({ type: "string", required: true })
-  userProfileId: string;
 }
 
 @Injectable()
@@ -16,7 +14,7 @@ export class DeleteWalletService {
     private readonly userWalletRepository: PrismaUserWalletRepository
   ) {}
 
-  async execute({ walletId, userProfileId }: DeleteWalletServiceDto) {
+  async execute({ walletId }: DeleteWalletServiceDto, userProfileId: string) {
     await this.walletRepository.delete(walletId, userProfileId);
     await this.userWalletRepository.delete(walletId, userProfileId);
   }

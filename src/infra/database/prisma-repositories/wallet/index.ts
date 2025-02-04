@@ -7,6 +7,17 @@ import { prismaClient } from "../../prisma";
 
 @Injectable()
 export class PrismaWalletRepository implements WalletRepository {
+  async getById(walletId: string): Promise<Wallet> {
+    return await prismaClient.wallet.findUniqueOrThrow({
+      where: {
+        id: walletId
+      },
+      include: {
+        userWallets: true
+      }
+    });
+  }
+
   async create(dto: CreateWalletDto): Promise<Wallet> {
     const response = await prismaClient.wallet.create({
       data: {
@@ -29,10 +40,12 @@ export class PrismaWalletRepository implements WalletRepository {
   }
 
   async delete(walletId: string, ownerId: string): Promise<void> {
-    await prismaClient.wallet.update({
+    await prismaClient.wallet.updateMany({
       where: {
-        id: walletId,
         AND: [
+          {
+            id: walletId
+          },
           {
             ownerId
           }

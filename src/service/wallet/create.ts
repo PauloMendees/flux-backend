@@ -7,8 +7,6 @@ export class CreateWalletServiceDto {
   name: string;
   @ApiProperty({ type: "string", required: false })
   description?: string;
-  @ApiProperty({ type: "string", required: true })
-  ownerId: string;
 }
 
 @Injectable()
@@ -18,10 +16,10 @@ export class CreateWalletService {
     private readonly userWalletRepository: PrismaUserWalletRepository
   ) {}
 
-  async execute(dto: CreateWalletServiceDto) {
-    const wallet = await this.walletRepository.create(dto);
+  async execute(dto: CreateWalletServiceDto, ownerId: string) {
+    const wallet = await this.walletRepository.create({ ...dto, ownerId });
     const userWallet = await this.userWalletRepository.create({
-      userProfileId: dto.ownerId,
+      userProfileId: ownerId,
       walletId: wallet.id
     });
 
