@@ -3,3 +3,8 @@ export interface CreateWalletDto {
   description: string;
   ownerId: string;
 }
+
+export interface CreateUserWalletDto {
+  userProfileId: string;
+  walletId: string;
+}

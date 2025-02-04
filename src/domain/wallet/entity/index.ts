@@ -10,3 +10,14 @@ export interface Wallet {
   createdAt?: Date;
   updatedAt?: Date;
 }
+
+export interface UserWallet {
+  id?: string;
+  deleted?: boolean;
+  userProfileId?: string;
+  walletId?: string;
+  user?: UserProfile;
+  wallet: Wallet;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
