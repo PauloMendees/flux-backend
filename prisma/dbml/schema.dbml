@@ -12,10 +12,12 @@ Table user_profile {
   transactions transaction [not null]
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [default: `now()`, not null]
+  Wallet wallet [not null]
 }
 
 Table user_wallet {
   id String [pk]
+  deleted Boolean [not null, default: false]
   user user_profile [not null]
   wallet wallet [not null]
   userProfileId String [not null]
@@ -27,6 +29,9 @@ Table wallet {
   id String [pk]
   name String [not null]
   description String
+  ownerId String [not null]
+  deleted Boolean [not null, default: false]
+  owner user_profile [not null]
   userWallets user_wallet [not null]
   transactions transaction [not null]
   createdAt DateTime [default: `now()`, not null]
@@ -70,6 +75,8 @@ Enum TRANSACTION_TYPE {
 Ref: user_wallet.userProfileId > user_profile.id
 
 Ref: user_wallet.walletId > wallet.id
+
+Ref: wallet.ownerId > user_profile.id
 
 Ref: transaction.walletId > wallet.id
 

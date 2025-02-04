@@ -14,12 +14,14 @@ model UserProfile {
   transactions Transaction[]
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @default(now())
+  Wallet       Wallet[]
 
   @@map("user_profile")
 }
 
 model UserWallet {
   id            String      @id @unique @default(uuid())
+  deleted       Boolean     @default(false)
   user          UserProfile @relation(fields: [userProfileId], references: [id])
   wallet        Wallet      @relation(fields: [walletId], references: [id])
   userProfileId String
@@ -33,6 +35,9 @@ model Wallet {
   id           String        @id @unique @default(uuid())
   name         String
   description  String?
+  ownerId      String
+  deleted      Boolean       @default(false)
+  owner        UserProfile   @relation(fields: [ownerId], references: [id])
   userWallets  UserWallet[]
   transactions Transaction[]
   createdAt    DateTime      @default(now())
