@@ -47,6 +47,7 @@ model Transaction {
   description   String?
   value         Float
   type          TRANSACTION_TYPE
+  date          DateTime         @default(now())
   categoryId    String?
   userProfileId String
   walletId      String?

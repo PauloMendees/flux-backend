@@ -21,7 +21,7 @@ export class PrismaCategoryRepository implements CategoryRepository {
       where: {
         id
       },
-      data: dto
+      data: { ...dto, updatedAt: new Date() }
     });
   }
 

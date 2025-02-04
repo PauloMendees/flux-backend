@@ -39,6 +39,7 @@ Table transaction {
   description String
   value Float [not null]
   type TRANSACTION_TYPE [not null]
+  date DateTime [default: `now()`, not null]
   categoryId String
   userProfileId String [not null]
   walletId String
