@@ -6,7 +6,7 @@ import { handleError } from "src/infra/errors/handleError";
 import { routes } from "src/infra/routes";
 import { CustomReq } from "src/infra/security/auth";
 import { validateSchema } from "src/infra/validations/validateSchema";
-import { ListCategoriesService } from "src/service/category/list";
+import { ListCategoriesService } from "src/application/service/category/list";
 
 @ApiTags(apiTags.category)
 @Controller()

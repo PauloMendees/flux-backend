@@ -4,7 +4,7 @@ import { apiTags } from "src/infra/constants/apiTags";
 import { routes } from "src/infra/routes";
 import { SkipAuth } from "src/infra/security/skipAuth";
 import { validateSchema } from "src/infra/validations/validateSchema";
-import { SignupRequestDTO, SignupService } from "src/service/auth/signup";
+import { SignupRequestDTO, SignupService } from "src/application/service/auth/signup";
 import { z } from "zod";
 
 const signupSchema = z.object({

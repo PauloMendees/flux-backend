@@ -3,7 +3,7 @@ import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { apiTags } from "src/infra/constants/apiTags";
 import { routes } from "src/infra/routes";
 import { CustomReq } from "src/infra/security/auth";
-import { DeleteWalletService, DeleteWalletServiceDto } from "src/service/wallet/delete";
+import { DeleteWalletService, DeleteWalletServiceDto } from "src/application/service/wallet/delete";
 
 @ApiTags(apiTags.wallet)
 @Controller()

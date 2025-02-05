@@ -3,7 +3,7 @@ import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { apiTags } from "src/infra/constants/apiTags";
 import { routes } from "src/infra/routes";
 import { CustomReq } from "src/infra/security/auth";
-import { GetUserProfileService } from "src/service/userProfile/getUserProfile";
+import { GetUserProfileService } from "src/application/service/userProfile/getUserProfile";
 
 @ApiTags(apiTags.profile)
 @Controller()

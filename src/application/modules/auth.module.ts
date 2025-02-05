@@ -1,8 +1,8 @@
 import { Module } from "@nestjs/common";
 import { SignupController } from "../controllers/auth/signup";
 import { SupabaseAuthRepository } from "../../infra/supabase/supabase-repositories/auth";
-import { SignupService } from "src/service/auth/signup";
-import { SigninService } from "src/service/auth/signin";
+import { SignupService } from "src/application/service/auth/signup";
+import { SigninService } from "src/application/service/auth/signin";
 import { SigninController } from "../controllers/auth/signin";
 import { PrismaUserProfileRepository } from "src/infra/database/prisma-repositories/user-profile";
 

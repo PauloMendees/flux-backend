@@ -4,7 +4,7 @@ import { apiTags } from "src/infra/constants/apiTags";
 import { routes } from "src/infra/routes";
 import { CustomReq } from "src/infra/security/auth";
 import { validateSchema } from "src/infra/validations/validateSchema";
-import { CreateWalletService, CreateWalletServiceDto } from "src/service/wallet/create";
+import { CreateWalletService, CreateWalletServiceDto } from "src/application/service/wallet/create";
 import { object, string } from "zod";
 
 const schema = object({

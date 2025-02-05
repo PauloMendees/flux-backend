@@ -5,16 +5,15 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 model UserProfile {
-  id           String        @id @unique @default(uuid())
-  first_name   String
-  last_name    String
-  email        String        @unique
-  userWallets  UserWallet[]
-  categories   Category[]
-  transactions Transaction[]
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @default(now())
-  Wallet       Wallet[]
+  id          String       @id @unique @default(uuid())
+  first_name  String
+  last_name   String
+  email       String       @unique
+  userWallets UserWallet[]
+  categories  Category[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @default(now())
+  Wallet      Wallet[]
 
   @@map("user_profile")
 }
@@ -58,7 +57,6 @@ model Transaction {
   userProfileId String
   walletId      String?
   wallet        Wallet?          @relation(fields: [walletId], references: [id])
-  user          UserProfile      @relation(fields: [userProfileId], references: [id])
   category      Category?        @relation(fields: [categoryId], references: [id])
   createdAt     DateTime         @default(now())
   updatedAt     DateTime         @default(now())

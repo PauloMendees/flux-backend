@@ -3,7 +3,7 @@ import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { apiTags } from "src/infra/constants/apiTags";
 import { routes } from "src/infra/routes";
 import { CustomReq } from "src/infra/security/auth";
-import { GetWalletByIdService, GetWalletByIdServiceDto } from "src/service/wallet/getById";
+import { GetWalletByIdService, GetWalletByIdServiceDto } from "src/application/service/wallet/getById";
 
 @ApiTags(apiTags.wallet)
 @Controller()

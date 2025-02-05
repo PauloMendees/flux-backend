@@ -9,7 +9,6 @@ Table user_profile {
   email String [unique, not null]
   userWallets user_wallet [not null]
   categories category [not null]
-  transactions transaction [not null]
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [default: `now()`, not null]
   Wallet wallet [not null]
@@ -50,7 +49,6 @@ Table transaction {
   userProfileId String [not null]
   walletId String
   wallet wallet
-  user user_profile [not null]
   category category
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [default: `now()`, not null]
@@ -80,8 +78,6 @@ Ref: user_wallet.walletId > wallet.id
 Ref: wallet.ownerId > user_profile.id
 
 Ref: transaction.walletId > wallet.id
-
-Ref: transaction.userProfileId > user_profile.id
 
 Ref: transaction.categoryId > category.id
 

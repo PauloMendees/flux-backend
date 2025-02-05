@@ -5,7 +5,7 @@ import { handleError } from "src/infra/errors/handleError";
 import { routes } from "src/infra/routes";
 import { CustomReq } from "src/infra/security/auth";
 import { validateSchema } from "src/infra/validations/validateSchema";
-import { UpdateCategoryService, UpdateCategoryServiceDTO } from "src/service/category/update";
+import { UpdateCategoryService, UpdateCategoryServiceDTO } from "src/application/service/category/update";
 import { z } from "zod";
 
 const schema = z.object({
