@@ -46,9 +46,8 @@ Table transaction {
   type TRANSACTION_TYPE [not null]
   date DateTime [default: `now()`, not null]
   categoryId String
-  userProfileId String [not null]
-  walletId String
-  wallet wallet
+  walletId String [not null]
+  wallet wallet [not null]
   category category
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [default: `now()`, not null]

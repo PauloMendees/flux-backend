@@ -33,7 +33,10 @@ export class PrismaWalletRepository implements WalletRepository {
       where: {
         id
       },
-      data: dto
+      data: {
+        ...dto,
+        updatedAt: new Date()
+      }
     });
 
     return response;

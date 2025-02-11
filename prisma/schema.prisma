@@ -47,19 +47,18 @@ model Wallet {
 }
 
 model Transaction {
-  id            String           @id @unique @default(uuid())
-  title         String
-  description   String?
-  value         Float
-  type          TRANSACTION_TYPE
-  date          DateTime         @default(now())
-  categoryId    String?
-  userProfileId String
-  walletId      String?
-  wallet        Wallet?          @relation(fields: [walletId], references: [id])
-  category      Category?        @relation(fields: [categoryId], references: [id])
-  createdAt     DateTime         @default(now())
-  updatedAt     DateTime         @default(now())
+  id          String           @id @unique @default(uuid())
+  title       String
+  description String?
+  value       Float
+  type        TRANSACTION_TYPE
+  date        DateTime         @default(now())
+  categoryId  String?
+  walletId    String
+  wallet      Wallet           @relation(fields: [walletId], references: [id])
+  category    Category?        @relation(fields: [categoryId], references: [id])
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @default(now())
 
   @@map("transaction")
 }
