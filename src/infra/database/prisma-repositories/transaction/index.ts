@@ -10,7 +10,7 @@ export class PrismaTransactionRepository implements TransactionRepository {
   async create(dto: CreateTransactionDTO): Promise<Transaction> {
     return await prismaClient.transaction.create({
       data: { ...dto },
-      include: { wallet: true }
+      include: { wallet: true, category: true }
     });
   }
 
@@ -18,7 +18,7 @@ export class PrismaTransactionRepository implements TransactionRepository {
     return await prismaClient.transaction.update({
       where: { id },
       data: { ...dto },
-      include: { wallet: true }
+      include: { wallet: true, category: true }
     });
   }
 
@@ -27,7 +27,10 @@ export class PrismaTransactionRepository implements TransactionRepository {
   }
 
   async getById(id: string): Promise<Transaction> {
-    return await prismaClient.transaction.findUniqueOrThrow({ where: { id }, include: { wallet: true } });
+    return await prismaClient.transaction.findUniqueOrThrow({
+      where: { id },
+      include: { wallet: true, category: true }
+    });
   }
 
   async list({ walletId, search, page, pageSize }: ListTransactionFilter): Promise<Transaction[]> {
@@ -45,7 +48,8 @@ export class PrismaTransactionRepository implements TransactionRepository {
         ]
       },
       include: {
-        wallet: true
+        wallet: true,
+        category: true
       }
     });
   }
