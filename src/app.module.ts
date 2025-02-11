@@ -7,6 +7,7 @@ import { AuthGuard } from "./infra/security/auth";
 import { UserProfileModule } from "./application/modules/userProfile.module";
 import { CategoryModule } from "./application/modules/category.module";
 import { WalletModule } from "./application/modules/wallet.module";
+import { TransactionModule } from "./application/modules/transaction.module";
 
 @Module({
   imports: [
@@ -18,7 +19,8 @@ import { WalletModule } from "./application/modules/wallet.module";
     AuthModule,
     UserProfileModule,
     CategoryModule,
-    WalletModule
+    WalletModule,
+    TransactionModule
   ],
   controllers: [],
   providers: [

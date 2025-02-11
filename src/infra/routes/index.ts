@@ -9,5 +9,8 @@ export const routes = {
   category: "/category",
   wallet: {
     main: "/wallet"
+  },
+  transaction: {
+    main: "/transaction"
   }
 };
