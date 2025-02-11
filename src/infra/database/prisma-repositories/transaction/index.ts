@@ -29,7 +29,14 @@ export class PrismaTransactionRepository implements TransactionRepository {
   async getById(id: string): Promise<Transaction> {
     return await prismaClient.transaction.findUniqueOrThrow({
       where: { id },
-      include: { wallet: true, category: true }
+      include: {
+        wallet: {
+          include: {
+            userWallets: true
+          }
+        },
+        category: true
+      }
     });
   }
 

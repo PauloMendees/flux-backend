@@ -2,10 +2,11 @@ import { Injectable } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { TransactionType } from "src/domain/transaction/entity";
 import { PrismaTransactionRepository } from "src/infra/database/prisma-repositories/transaction";
-import { PrismaWalletRepository } from "src/infra/database/prisma-repositories/wallet";
-import { verifyIfUserIsInWallet } from "src/infra/utils/wallet/verifyIfUserIsInWallet";
+import { verifyIfUserCanHandleTransaction } from "src/infra/utils/transaction/verifyIfUserCanHandleTransaction";
 
-export class CreateTransactionServiceDTO {
+export class UpdateTransactionServiceDTO {
+  @ApiProperty({ type: "string" })
+  id: string;
   @ApiProperty({ type: "string" })
   title: string;
   @ApiProperty({ type: "string", required: false })
@@ -23,22 +24,17 @@ export class CreateTransactionServiceDTO {
 }
 
 @Injectable()
-export class CreateTransactionService {
-  constructor(
-    private readonly transactionRepository: PrismaTransactionRepository,
-    private readonly walletRepository: PrismaWalletRepository
-  ) {}
+export class UpdateTransactionService {
+  constructor(private readonly transactionRepository: PrismaTransactionRepository) {}
 
-  async execute(dto: CreateTransactionServiceDTO, userProfileId: string) {
-    await verifyIfUserIsInWallet({
-      userProfileId,
-      walletRepository: this.walletRepository,
-      walletId: dto.walletId
+  async execute(dto: UpdateTransactionServiceDTO, userId: string) {
+    await verifyIfUserCanHandleTransaction({
+      transactionRepository: this.transactionRepository,
+      transactionId: dto.id,
+      userProfileId: userId
     });
 
-    const transaction = await this.transactionRepository.create({
-      ...dto
-    });
+    const transaction = await this.transactionRepository.update(dto);
 
     return transaction;
   }

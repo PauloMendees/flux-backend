@@ -4,7 +4,7 @@ import { CreateTransactionDTO } from "../entity/dto/create";
 import { UpdateTransactionDTO } from "../entity/dto/update";
 
 export type ListTransactionFilter = DefaultQueryFilter & {
-  walletId: string;
+  walletId?: string;
 };
 
 export interface TransactionRepository {

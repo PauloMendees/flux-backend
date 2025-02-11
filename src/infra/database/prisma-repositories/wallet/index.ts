@@ -42,17 +42,10 @@ export class PrismaWalletRepository implements WalletRepository {
     return response;
   }
 
-  async delete(walletId: string, ownerId: string): Promise<void> {
-    await prismaClient.wallet.updateMany({
+  async delete(walletId: string): Promise<void> {
+    await prismaClient.wallet.update({
       where: {
-        AND: [
-          {
-            id: walletId
-          },
-          {
-            ownerId
-          }
-        ]
+        id: walletId
       },
       data: {
         deleted: true
